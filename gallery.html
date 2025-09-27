@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rupanshi Dhiman | Design Gallery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366F1;
+            --primary-dark: #4F46E5;
+            --primary-light: #A5B4FC;
+            --text: #1F2937;
+            --text-light: #6B7280;
+            --background: #FFFFFF;
+            --surface: #F9FAFB;
+            --surface-dark: #F3F4F6;
+            --accent: #10B981;
+            --error: #EF4444;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .header.scrolled {
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 180px 0 120px;
+            background: linear-gradient(135deg, #F0F4FF 0%, #FFFFFF 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light) 0%, transparent 70%);
+            opacity: 0.3;
+        }
+
+        .gallery-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            line-height: 1.7;
+        }
+
+        /* Gallery Grid */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .gallery-media {
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-media img,
+        .gallery-media video {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover .gallery-media img,
+        .gallery-item:hover .gallery-media video {
+            transform: scale(1.05);
+        }
+
+        .gallery-media::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .gallery-media:hover::after {
+            background: rgba(0, 0, 0, 0.3);
+            content: '🔍';
+        }
+
+        .gallery-caption {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .gallery-caption p {
+            margin-bottom: 0;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .span-two-columns {
+            grid-column: span 2;
+        }
+
+        .span-two-columns .gallery-media img,
+        .span-two-columns .gallery-media video {
+            height: 300px;
+        }
+
+        .project-card {
+            display: block;
+            height: 100%;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+
+        .project-info p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            color: var(--text-light);
+        }
+
+        .project-tag {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .gallery-cta {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: var(--radius);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            transition: var(--transition);
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-modal:hover {
+            color: #fff;
+            background: var(--error);
+        }
+
+        .modal-video {
+            width: auto;
+            height: auto;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+
+        #modalContent {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .photo-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .span-two-columns {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .gallery {
+                padding: 140px 0 80px;
+            }
+            
+            section {
+                padding: 80px 0;
+            }
+            
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .close-modal {
+                top: 10px;
+                right: 15px;
+                font-size: 30px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Rupanshi Dhiman</a>
+            <nav class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="work.html">Work</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <button class="menu-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section id="gallery" class="gallery section">
+            <div class="container">
+                <div class="gallery-content">
+                    <div class="section-header fade-in">
+                        <h2 class="section-title">My Practice Gallery</h2>
+                        <p class="section-subtitle">Some of my basic practice designs which I'm learning in my training.</p>
+                    </div>
+
+                    <div class="photo-grid">
+                        <div class="gallery-item span-two-columns fade-in">
+                            <a href="https://labelakshitaarora.com/" class="project-card" target="_blank">
+                                <div class="gallery-media">
+                                    <img src="1.png" alt="Label Akshita Arora Website">
+                                </div>
+                                <div class="project-info">
+                                    <h3>Label Akshita Arora</h3>
+                                    <p>Fashion Brand Website | UI/UX Design</p>
+                                    <span class="project-tag">Website Design</span>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <div class="gallery-item span-two-columns fade-in">
+                            <a href="https://www.instagram.com/i_akshitaarora?igsh=MXVhaTV0bm9ycjhoeg==" class="project-card" target="_blank">
+                                <div class="gallery-media">
+                                    <img src="insta1.png" alt="Brand Social Media Mockup">
+                                </div>
+                                <div class="project-info">
+                                    <h3>Social Media</h3>
+                                    <p>Content & UI Design</p>
+                                    <span class="project-tag">Social Media</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                        <div class="gallery-media" data-video="pe (1).mp4" data-type="video">
+                            <video src="pe (1).mp4" loop autoplay muted playsinline poster="path/to/placeholder/image.jpg"></video>
+                        </div>
+                            <div class="gallery-caption">
+                                <p>Youtube Thumbnail (Video)</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                        <div class="gallery-media" data-video="Add a heading.mp4" data-type="video">
+                            <video src="Add a heading.mp4" loop autoplay muted playsinline poster="path/to/placeholder/image.jpg"></video>
+                            </div>
+                            <div class="gallery-caption">
+                                <p>Competition Poster (Video)</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="Bird.jpg" data-type="image">
+                                <img src="Bird.jpg" alt="Bird Illustration">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>Bird Illustration</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="Fox.jpg" data-type="image">
+                                <img src="Fox.jpg" alt="Fox Illustration">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>Fox Illustration</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="add.jpg" data-type="image">
+                                <img src="add.jpg" alt="Ad Poster">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>Ad Poster</p>
+                            </div>
+                        </div>
+
+                         <div class="gallery-item span-two-columns fade-in">
+                            <a href="https://www.instagram.com/label_akshitaarora?igsh=MWZwdjhrYTFzaGp2eg==" class="project-card" target="_blank">
+                                <div class="gallery-media">
+                                    <img src="brand.png" alt="Brand Social Media Mockup">
+                                </div>
+                                <div class="project-info">
+                                    <h3>Fashion Social Media Brand Handling</h3>
+                                    <p>Content & UI Design & UX</p>
+                                    <span class="project-tag">Social Media</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="HAPPY EARTH DAY.png" data-type="image">
+                                <img src="HAPPY EARTH DAY.png" alt="Earth day Poster">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>Earth Day Poster</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="homework.jpg" data-type="image">
+                                <img src="homework.jpg" alt="Illustration">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>Illustration</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="hut.jpg" data-type="image">
+                                <img src="hut.jpg" alt="Hut Illustration">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>Hut Illustration</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="Late Summer Floral Collection.png" data-type="image">
+                                <img src="Late Summer Floral Collection.png" alt="Floral collection poster">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>Floral Collection Poster</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="LIVE MUSIC NIGHT.png" data-type="image">
+                                <img src="LIVE MUSIC NIGHT.png" alt="Live music poster">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>Live Music Night Poster</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="new.jpg" data-type="image">
+                                <img src="new.jpg" alt="Airport transfers Ad">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>Airport Transfers Ad</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="photograph.jpg" data-type="image">
+                                <img src="photograph.jpg" alt="Photography poster">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>Photography Poster</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="poster(trip).jpg" data-type="image">
+                                <img src="poster(trip).jpg" alt="Trip poster">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>Trip Poster</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="poster.jpg" data-type="image">
+                                <img src="poster.jpg" alt="Look poster">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>Look Poster</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="Preview.png" data-type="image">
+                                <img src="Preview.png" alt="Social Manager logo">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>Social Manager Logo</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="Preview1.png" data-type="image">
+                                <img src="Preview1.png" alt="HelloBakers logo">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>HelloBakers Logo</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="Preview2.png" data-type="image">
+                                <img src="Preview2.png" alt="CODA logo">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>CODA Logo</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="product.jpg" data-type="image">
+                                <img src="product.jpg" alt="Product 3D design">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>Product 3D Design</p>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item fade-in">
+                            <div class="gallery-media" data-image="Visa card 2.png" data-type="image">
+                                <img src="Visa card 2.png" alt="Visa card design">
+                            </div>
+                            <div class="gallery-caption">
+                                <p>Visa Card Design</p>
+                            </div>
+                        </div>
+
+                         <div class="gallery-item">
+                        <div class="gallery-media" data-video="Untitled design.mp4" data-type="video">
+                            <video src="Untitled design.mp4" loop autoplay muted playsinline poster="path/to/placeholder/image.jpg"></video>
+                        </div>
+                        <p class="caption">Online Classroom GIF (Video)</p>
+                    </div>
+                        </div>
+                    </div>
+
+                    <div class="gallery-cta fade-in">
+                        <a href="work.html" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to All Projects
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for images and videos -->
+    <div class="modal" id="imageModal">
+        <span class="close-modal">&times;</span>
+        <div id="modalContent"></div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Rupanshi Dhiman. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Header scroll effect
+            const header = document.querySelector('.header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // 2. Mobile navigation toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            menuToggle.addEventListener('click', () => {
+                navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+                menuToggle.querySelector('i').classList.toggle('fa-bars');
+                menuToggle.querySelector('i').classList.toggle('fa-times');
+            });
+
+            // 3. Modal functionality for images and videos
+            const modal = document.getElementById('imageModal');
+            const modalContent = document.getElementById('modalContent');
+            const closeModal = document.querySelector('.close-modal');
+            const galleryMedia = document.querySelectorAll('.gallery-media');
+
+            galleryMedia.forEach(media => {
+                media.addEventListener('click', (e) => {
+                    // Don't prevent default for project cards with external links
+                    if (!media.closest('.project-card') || !media.closest('.project-card').getAttribute('href')) {
+                        e.preventDefault();
+                    }
+                    
+                    // Clear previous content
+                    modalContent.innerHTML = '';
+                    
+                    const mediaType = media.getAttribute('data-type');
+                    
+                    if (mediaType === 'image') {
+                        const imageSrc = media.getAttribute('data-image');
+                        const img = document.createElement('img');
+                        img.src = imageSrc;
+                        img.className = 'modal-content';
+                        modalContent.appendChild(img);
+                    } else if (mediaType === 'video') {
+                        const videoSrc = media.getAttribute('data-video');
+                        const video = document.createElement('video');
+                        video.src = videoSrc;
+                        video.controls = true;
+                        video.autoplay = true;
+                        video.className = 'modal-content modal-video';
+                        modalContent.appendChild(video);
+                    }
+                    
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            closeModal.addEventListener('click', () => {
+                // Pause any playing videos before closing
+                const videos = modalContent.querySelectorAll('video');
+                videos.forEach(video => {
+                    video.pause();
+                });
+                
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    // Pause any playing videos before closing
+                    const videos = modalContent.querySelectorAll('video');
+                    videos.forEach(video => {
+                        video.pause();
+                    });
+                    
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // 4. Scroll animations
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = () => {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', fadeInOnScroll);
+            fadeInOnScroll(); // Check on load
+
+            // 5. Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // 6. Active navigation highlighting
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+            navLinks.forEach(link => {
+                let linkHref = link.getAttribute('href').split('/').pop();
+                if (linkHref === '' || linkHref.startsWith('#')) linkHref = 'index.html'; 
+
+                if (linkHref === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
